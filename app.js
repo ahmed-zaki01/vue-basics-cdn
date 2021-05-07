@@ -2,11 +2,26 @@ const app = Vue.createApp({
   data() {
     return {
       showBooks: true,
-      title: "This book",
-      author: "me",
-      age: 26,
-      x: 0,
-      y: 0,
+      books: [
+        {
+          title: "book one",
+          author: "author one",
+          img: "images/b1.png",
+          isFav: true,
+        },
+        {
+          title: "book two",
+          author: "author two",
+          img: "images/b2.png",
+          isFav: false,
+        },
+        {
+          title: "book three",
+          author: "author three",
+          img: "images/b3.png",
+          isFav: true,
+        },
+      ],
     };
   },
   methods: {
@@ -16,15 +31,13 @@ const app = Vue.createApp({
     toggleShowBooks() {
       return (this.showBooks = !this.showBooks);
     },
-    handleEvent(e, data) {
-      console.log(e, e.type);
-      if (data) {
-        console.log(data);
-      }
+    toggleFavBook(book) {
+      return (book.isFav = !book.isFav);
     },
-    handleMousemove(e) {
-      this.x = e.offsetX;
-      this.y = e.offsetY;
+  },
+  computed: {
+    filteredBooks() {
+      return this.books.filter((book) => book.isFav);
     },
   },
 });

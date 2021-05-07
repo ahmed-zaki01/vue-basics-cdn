@@ -9,26 +9,56 @@
 
   <script src="https://unpkg.com/vue@3.0.2"></script>
   <style>
-    #app {
+    body {
+      max-width: 960px;
+      background: #eee;
+      margin: 20px auto;
       text-align: center;
     }
 
-    .box {
-      display: inline-block;
-      background: #ddd;
-      width: 400px;
-      text-align: center;
-      padding: 100px 0;
-      margin: 20px;
+    p,
+    h3,
+    ul {
+      margin: 0;
+      padding: 0;
+    }
+
+    li {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 20px;
+      margin: 20px auto;
+      list-style-type: none;
+      background: #fff;
+      border-radius: 10px;
+    }
+
+    li.fav {
+      background: #ff9ed2;
+      color: #fff;
+    }
+
+    img {
+      width: 100px;
+      height: 100px;
+      border-radius: 3px;
     }
   </style>
 </head>
 
 <body>
+  <h2>Hello, Vue :)</h2>
   <div id="app">
     <div class="show-books">
       <div v-if="showBooks">
-        <h2>{{ title }} - {{ author }} - {{ age }}</h2>
+        <ul>
+          <li v-for="book in filteredBooks" :class="{ fav: book.isFav }" @click="toggleFavBook(book)">
+            <img class="img" :src="book.img" :alt="book.title">
+            <h3>{{ book.title }}</h3>
+            <p>{{ book.author }}</p>
+          </li>
+        </ul>
       </div>
 
       <div>
@@ -41,12 +71,6 @@
       </div>
 
     </div>
-
-    <br>
-    <div class="box" @mouseover="handleEvent($event, 5)">mouseover (enter)</div>
-    <div class="box" @mouseleave="handleEvent">mouseleave</div>
-    <div class="box" @dblclick="handleEvent">double click</div>
-    <div class="box" @mousemove="handleMousemove">Position - {{ x }} {{ y }}</div>
 
   </div>
 
