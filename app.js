@@ -5,6 +5,8 @@ const app = Vue.createApp({
       title: "This book",
       author: "me",
       age: 26,
+      x: 0,
+      y: 0,
     };
   },
   methods: {
@@ -13,6 +15,16 @@ const app = Vue.createApp({
     },
     toggleShowBooks() {
       return (this.showBooks = !this.showBooks);
+    },
+    handleEvent(e, data) {
+      console.log(e, e.type);
+      if (data) {
+        console.log(data);
+      }
+    },
+    handleMousemove(e) {
+      this.x = e.offsetX;
+      this.y = e.offsetY;
     },
   },
 });
